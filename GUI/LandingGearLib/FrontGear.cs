@@ -9,9 +9,9 @@ namespace LandingGearLib
 {
     public class FrontGear : Cylinder
     {
-        public FrontGear(string location) : base(location)
+        public FrontGear(string location, Targets target) : base(location, target)
         {
-            Is_Locked = true;
+            _position = 0.0;
             uidp = 8;
             fdthp = 16;
             lihp = 4;
@@ -24,9 +24,9 @@ namespace LandingGearLib
 
     public class SideGear : Cylinder
     {
-        public SideGear(string location) : base(location)
+        public SideGear(string location, Targets target) : base(location, target)
         {
-            Is_Locked = true;
+            _position = 0.0;
             uidp = 8;
             fdthp = 20;
             lihp = 4;
@@ -38,9 +38,10 @@ namespace LandingGearLib
 
     public class FrontDoor : Cylinder
     {
-        public FrontDoor(string location) : base(location)
+        public FrontDoor(string location, Targets target) : base(location, target)
         {
-            Is_Locked = true;
+
+            _position = 90.0;
             uidp = 0;
             fdthp = 12;
             lihp = 3;
@@ -51,9 +52,10 @@ namespace LandingGearLib
     }
     public class SideDoor : Cylinder
     {
-        public SideDoor(string location) : base(location)
+        public SideDoor(string location, Targets target) : base(location, target)
         {
-            Is_Locked = true;
+
+            _position = 90.0;
             uidp = 0;
             fdthp = 16;
             lihp = 3;

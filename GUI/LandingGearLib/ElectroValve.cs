@@ -4,36 +4,68 @@ namespace LandingGearLib
 {
     public class ElectroValve
     {
-        private List<Cylinder> cylinders;
-
-        public ElectroValve(string location, string type, bool on)
+        public enum Types
         {
-            Location = location;
-            Type = type;
-            On = on;
+            Retraction,
+            Extension
         }
 
-        public string Location { get; }
-        public string Type { get; }
-        public bool On { get; set; }
-
-        public void Update()
+        public enum Targets
         {
-            if (!On) return;
-            if (Type == "Retraction")
+            Doors,
+            Gears
+        }
+        public List<Cylinder> Cylinders { get; }
+
+        public ElectroValve(Targets target, Types type , bool pressurized)
+        {
+            Target = target;
+            Type = type;
+            Pressurized = pressurized;
+            Cylinders = new List<Cylinder>();
+        }
+
+        public Targets Target { get; }
+        public Types Type { get; }
+        public bool Pressurized { get; set; }
+
+        public void StartStimulate()
+        {
+            if (Pressurized)
             {
-                foreach (var cylinder in cylinders)
+                if (Type == Types.Retraction)
                 {
-                    cylinder.Retract();
+                    foreach (var cylinder in Cylinders)
+                    {
+                        cylinder.Retract();
+                    }
+                }
+                else if (Type == Types.Extension)
+                {
+                    foreach (var cylinder in Cylinders)
+                    {
+                        cylinder.Extend();
+                    }
                 }
             }
-            else if (Type == "Extension")
-            {
-                foreach (var cylinder in cylinders)
+        }
+
+        public void EndStimulate()
+        {
+                if (Type == Types.Retraction)
                 {
-                    cylinder.Extend();
+                    foreach (var cylinder in Cylinders)
+                    {
+                        cylinder.StopRetract();
+                    }
                 }
-            }
+                else if (Type == Types.Extension)
+                {
+                    foreach (var cylinder in Cylinders)
+                    {
+                        cylinder.StopExtend();
+                    }
+                }
         }
     }
 }
