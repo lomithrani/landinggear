@@ -73,6 +73,7 @@ namespace LandingGearLib
             // stimulate doors extension electrovalve
             valves.Single(v => v.Target == ElectroValve.Targets.Doors && v.Type == ElectroValve.Types.Extension).StartStimulate();
 
+
             //wait for all door cylinders to be opened and lock and the plane is not on floor
             while (!(
                 cylinders.Where(c => c.Target == Cylinder.Targets.Doors).All(cyl => cyl.Gear_Extended && cyl.Is_Locked)
@@ -80,7 +81,7 @@ namespace LandingGearLib
                 cylinders.Where(c => c.Target == Cylinder.Targets.Gears).All(cyl => !cyl.OnFloor)
                 ))
             {
-
+                cylinders.ForEach(c => observers.ForEach(o => o.OnNext(c)));
             }
 
             //stimulate de geares retraction electrovalve
@@ -89,7 +90,7 @@ namespace LandingGearLib
             //wait for all gear cylinders to be closed and lock
             while (!cylinders.Where(c => c.Target == Cylinder.Targets.Gears).All(cyl => cyl.Gear_retracted && cyl.Is_Locked))
             {
-
+                cylinders.ForEach(c => observers.ForEach(o => o.OnNext(c)) );
             }
 
             //stop stimulatiing doors extension electrovalve
@@ -101,7 +102,7 @@ namespace LandingGearLib
             //wait for all door cylinders to be closed and lock
             while (!cylinders.Where(c => c.Target == Cylinder.Targets.Doors).All(cyl => cyl.Gear_retracted && cyl.Is_Locked))
             {
-
+                cylinders.ForEach(c => observers.ForEach(o => o.OnNext(c)));
             }
 
             //end stimulation of closing doors
@@ -122,7 +123,7 @@ namespace LandingGearLib
             //wait for all door cylinders to be opend and lock
             while ( !cylinders.Where(c => c.Target == Cylinder.Targets.Doors).All(cyl => cyl.Gear_Extended && cyl.Is_Locked) )
             {
-
+                cylinders.ForEach(c => observers.ForEach(o => o.OnNext(c)));
             }
             
 
@@ -132,7 +133,7 @@ namespace LandingGearLib
             //wait for all gear cylinders to be opend and lock
             while (!cylinders.Where(c => c.Target == Cylinder.Targets.Gears).All(cyl => cyl.Gear_Extended && cyl.Is_Locked))
             {
-
+                cylinders.ForEach(c => observers.ForEach(o => o.OnNext(c)));
             }
            
             //stop stimulatiing doors extension electrovalve
@@ -144,7 +145,7 @@ namespace LandingGearLib
             //wait for all door cylinders to be closed and lock
             while (!cylinders.Where(c => c.Target == Cylinder.Targets.Doors).All(cyl => cyl.Gear_retracted && cyl.Is_Locked))
             {
-
+                cylinders.ForEach(c => observers.ForEach(o => o.OnNext(c)));
             }
 
             //end stimulation of closing doors
