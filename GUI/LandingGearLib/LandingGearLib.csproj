@@ -43,6 +43,7 @@
     <Compile Include="ComputingModule.cs" />
     <Compile Include="Cylinder.cs" />
     <Compile Include="ElectroValve.cs" />
+    <Compile Include="FrontGear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unsubscriber.cs" />
   </ItemGroup>
