@@ -1,5 +1,5 @@
 #Landing Gear
-#>Louis Gentil - Xavier Cauzard
+###Louis Gentil - Xavier Cauzard
 
 ## Jalon 1 
 >Library: Fully functionnal and tested with NUnit and NSubstite
